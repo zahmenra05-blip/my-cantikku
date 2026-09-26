@@ -823,20 +823,22 @@
     }
 
     .surprise {
-      max-height: 0;
+      display: grid;
+      grid-template-rows: 0fr;
       margin-top: 0;
       overflow: hidden;
       opacity: 0;
-      transition: 0.8s ease;
+      transition: grid-template-rows 0.8s ease, margin-top 0.8s ease, opacity 0.8s ease;
     }
 
     .surprise.show {
-      max-height: 300px;
+      grid-template-rows: 1fr;
       margin-top: 25px;
       opacity: 1;
     }
 
     .surprise p {
+      min-height: 0;
       padding: 20px;
       border-radius: 22px;
       border: 1px solid rgba(255, 224, 235, 0.72);
