@@ -823,22 +823,18 @@
     }
 
     .surprise {
-      display: grid;
-      grid-template-rows: 0fr;
+      display: none;
       margin-top: 0;
-      overflow: hidden;
       opacity: 0;
-      transition: grid-template-rows 0.8s ease, margin-top 0.8s ease, opacity 0.8s ease;
     }
 
     .surprise.show {
-      grid-template-rows: 1fr;
+      display: block;
       margin-top: 25px;
-      opacity: 1;
+      animation: surprise-masuk 0.6s ease both;
     }
 
     .surprise p {
-      min-height: 0;
       padding: 20px;
       border-radius: 22px;
       border: 1px solid rgba(255, 224, 235, 0.72);
@@ -846,6 +842,18 @@
       background: linear-gradient(135deg, #fff2f7, #f8deea);
       font-size: 1.1rem;
       line-height: 1.7;
+    }
+
+    @keyframes surprise-masuk {
+      from {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .signature {
@@ -1123,7 +1131,7 @@
       </p>
 
       <button onclick="tiupLilin()">Tiup Lilinnya</button>
-      <button onclick="bukaKejutan()">Buka Ini Sayang</button>
+      <button id="surpriseButton" aria-expanded="false" aria-controls="surprise" onclick="bukaKejutan()">Buka Ini Sayang</button>
 
       <p class="hint">Jangan lupa buat permohonan sebelum tiup lilinnya ✨</p>
 
@@ -1266,8 +1274,19 @@
     }
 
     function bukaKejutan() {
-      document.getElementById("surprise").classList.toggle("show");
+      const surprise = document.getElementById("surprise");
+      const isOpen = surprise.classList.toggle("show");
+      document.getElementById("surpriseButton").setAttribute("aria-expanded", String(isOpen));
       buatKonfeti(70);
+
+      if (isOpen && window.matchMedia("(max-width: 500px)").matches) {
+        window.requestAnimationFrame(() => {
+          surprise.scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+            block: "start"
+          });
+        });
+      }
     }
 
     function buatKonfeti(jumlah) {
