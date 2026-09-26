@@ -604,13 +604,6 @@
       background: #edc3d4;
     }
 
-    .video-caption {
-      margin-top: 12px;
-      color: #fff0f6;
-      font-family: "Segoe UI", sans-serif;
-      font-size: 0.9rem;
-    }
-
     .message {
       max-width: 580px;
       margin: 24px auto;
@@ -1035,7 +1028,6 @@
               Browser kamu belum mendukung pemutaran video.
             </video>
           </div>
-          <p class="video-caption">Video diputar otomatis tanpa suara saat terlihat.</p>
         </article>
         <article class="video-memory">
           <h3>Manisku ♡</h3>
@@ -1045,7 +1037,6 @@
               Browser kamu belum mendukung pemutaran video.
             </video>
           </div>
-          <p class="video-caption">Video diputar otomatis tanpa suara saat terlihat.</p>
         </article>
         <article class="video-memory">
           <h3>I love you ♡</h3>
@@ -1055,7 +1046,6 @@
               Browser kamu belum mendukung pemutaran video.
             </video>
           </div>
-          <p class="video-caption">Video diputar otomatis tanpa suara saat terlihat.</p>
         </article>
       </section>
 
@@ -1157,9 +1147,8 @@
               otherVideo.pause();
             }
           });
-          video.play().catch(() => {
-            video.closest(".video-memory").querySelector(".video-caption").textContent =
-              "Tekan tombol putar untuk menonton video.";
+          video.play().catch((error) => {
+            console.warn("Video could not autoplay:", error);
           });
         } else {
           video.pause();
