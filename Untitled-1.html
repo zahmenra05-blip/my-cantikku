@@ -123,6 +123,84 @@
       perspective: 700px;
     }
 
+    .rose-bouquet {
+      position: absolute;
+      z-index: 6;
+      bottom: 2px;
+      left: 50%;
+      width: 170px;
+      height: 158px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 18px) scale(0.45);
+      transform-origin: 50% 100%;
+      transition:
+        opacity 0.35s ease,
+        transform 1s cubic-bezier(0.18, 0.8, 0.25, 1) 0.12s;
+    }
+
+    .rose-bouquet svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .rose-flower {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .rose-shower {
+      position: fixed;
+      z-index: 60;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .shower-rose {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      width: var(--rose-size);
+      height: calc(var(--rose-size) * 1.16);
+      filter: drop-shadow(0 5px 9px rgba(111, 24, 59, 0.28));
+      animation: rose-burst 2.2s cubic-bezier(0.15, 0.65, 0.25, 1) var(--rose-delay) both;
+      will-change: transform, opacity;
+    }
+
+    .shower-rose svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    @keyframes rose-burst {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.15) rotate(-30deg);
+      }
+
+      14% {
+        opacity: 1;
+      }
+
+      72% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform:
+          translate(calc(-50% + var(--rose-x)), calc(-50% + var(--rose-y)))
+          scale(1)
+          rotate(var(--rose-rotation));
+      }
+    }
+
     @keyframes amplop-melayang {
       50% { transform: translateY(-9px); }
     }
@@ -221,6 +299,35 @@
 
     .intro-screen.opening .envelope {
       animation: none;
+    }
+
+    .intro-screen.opening .rose-bouquet {
+      opacity: 1;
+      transform: translate(-50%, -54px) scale(1);
+    }
+
+    .intro-screen.opening .rose-flower {
+      animation: rose-bloom 0.7s cubic-bezier(0.18, 0.8, 0.25, 1) both;
+    }
+
+    .intro-screen.opening .rose-second {
+      animation-delay: 0.12s;
+    }
+
+    .intro-screen.opening .rose-third {
+      animation-delay: 0.24s;
+    }
+
+    @keyframes rose-bloom {
+      from {
+        opacity: 0;
+        transform: scale(0.25) rotate(-18deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
     }
 
     .intro-screen.opening .envelope-flap {
@@ -1033,6 +1140,53 @@
         <div class="envelope-front"></div>
         <div class="envelope-flap"></div>
         <div class="envelope-seal">♡</div>
+        <div class="rose-bouquet">
+          <svg viewBox="0 0 180 170" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="rosePetals" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffb1c7" />
+                <stop offset="0.55" stop-color="#e34d79" />
+                <stop offset="1" stop-color="#9f214e" />
+              </linearGradient>
+              <linearGradient id="roseLeaf" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8ac98c" />
+                <stop offset="1" stop-color="#34744e" />
+              </linearGradient>
+            </defs>
+            <g fill="none" stroke="#477d52" stroke-linecap="round" stroke-width="3.5">
+              <path d="M88 158 C83 120 58 91 48 57" />
+              <path d="M90 158 C94 111 91 69 91 38" />
+              <path d="M92 158 C105 118 127 90 134 60" />
+            </g>
+            <g fill="url(#roseLeaf)" stroke="#fff0f3" stroke-opacity=".5" stroke-width="1">
+              <path d="M73 130 C48 126 40 111 43 100 C61 101 74 111 78 125Z" />
+              <path d="M101 126 C119 107 135 109 143 116 C132 131 117 137 103 133Z" />
+              <path d="M81 105 C61 94 59 79 65 70 C80 78 87 91 85 103Z" />
+              <path d="M99 94 C114 75 130 76 137 83 C127 98 113 104 100 101Z" />
+            </g>
+            <g class="rose-flower rose-first">
+              <circle cx="48" cy="49" r="21" fill="url(#rosePetals)" />
+              <ellipse cx="39" cy="48" rx="9" ry="14" fill="#f47798" transform="rotate(-38 39 48)" />
+              <ellipse cx="54" cy="43" rx="9" ry="14" fill="#f889a6" transform="rotate(35 54 43)" />
+              <ellipse cx="49" cy="55" rx="10" ry="13" fill="#c93665" transform="rotate(8 49 55)" />
+              <path d="M43 51 C39 43 49 37 56 44 C62 51 53 61 45 56 C41 53 44 47 49 47 C53 47 55 51 52 54" fill="none" stroke="#8d2145" stroke-linecap="round" stroke-width="3" />
+            </g>
+            <g class="rose-flower rose-second">
+              <circle cx="91" cy="31" r="23" fill="url(#rosePetals)" />
+              <ellipse cx="80" cy="29" rx="10" ry="15" fill="#f47798" transform="rotate(-38 80 29)" />
+              <ellipse cx="97" cy="25" rx="10" ry="15" fill="#f889a6" transform="rotate(35 97 25)" />
+              <ellipse cx="92" cy="38" rx="11" ry="14" fill="#c93665" transform="rotate(8 92 38)" />
+              <path d="M85 33 C81 24 92 18 100 26 C107 34 96 45 87 39 C83 36 86 29 92 29 C96 29 98 33 94 37" fill="none" stroke="#8d2145" stroke-linecap="round" stroke-width="3" />
+            </g>
+            <g class="rose-flower rose-third">
+              <circle cx="135" cy="51" r="21" fill="url(#rosePetals)" />
+              <ellipse cx="126" cy="49" rx="9" ry="14" fill="#f47798" transform="rotate(-38 126 49)" />
+              <ellipse cx="141" cy="45" rx="9" ry="14" fill="#f889a6" transform="rotate(35 141 45)" />
+              <ellipse cx="136" cy="57" rx="10" ry="13" fill="#c93665" transform="rotate(8 136 57)" />
+              <path d="M130 52 C126 44 136 38 143 45 C150 52 141 63 132 57 C128 54 131 48 136 48 C140 48 142 52 139 55" fill="none" stroke="#8d2145" stroke-linecap="round" stroke-width="3" />
+            </g>
+          </svg>
+        </div>
       </div>
       <p class="intro-copy" id="introCopy"><strong>Untuk cantiku</strong></p>
       <button class="intro-button" id="openLetter" type="button">♡ &nbsp; Buka suratnya &nbsp; ♡</button>
@@ -1041,6 +1195,19 @@
 
   <div class="hearts" id="hearts"></div>
   <div id="confetti"></div>
+  <template id="roseTemplate">
+    <svg viewBox="0 0 80 94" aria-hidden="true" focusable="false">
+      <path d="M40 48 C39 63 39 77 40 90" fill="none" stroke="#39774f" stroke-linecap="round" stroke-width="4" />
+      <path d="M39 68 C27 56 17 59 15 64 C21 75 31 77 40 73Z" fill="#5a9c63" />
+      <path d="M41 78 C52 65 62 67 65 72 C59 83 50 86 40 83Z" fill="#76b875" />
+      <path d="M40 7 C33 0 21 3 19 12 C8 9 1 18 6 28 C0 36 7 47 17 47 C22 57 35 57 40 50 C48 58 61 55 64 45 C75 45 81 34 74 26 C78 16 69 7 59 10 C54 1 43 0 40 7Z" fill="#aa2452" />
+      <path d="M40 11 C33 5 24 9 24 17 C15 14 8 21 13 29 C6 36 13 44 21 42 C24 52 35 51 40 44 C47 52 57 48 58 40 C68 42 73 33 66 27 C71 18 62 12 55 16 C52 7 44 6 40 11Z" fill="#dc3d6a" />
+      <path d="M40 16 C34 11 28 15 29 22 C22 19 17 25 21 31 C16 36 21 42 28 39 C31 47 37 46 40 40 C45 47 52 43 51 37 C59 38 62 31 56 27 C60 21 54 16 49 20 C47 13 42 12 40 16Z" fill="#f26787" />
+      <path d="M40 21 C35 18 32 22 34 27 C29 24 25 29 29 33 C26 37 31 41 35 37 C37 43 42 42 43 37 C48 41 52 37 49 33 C54 30 51 25 47 27 C47 21 43 19 40 21Z" fill="#ff9bad" />
+      <path d="M39 25 C35 26 36 32 41 32 C45 32 45 27 42 26 C41 24 39 24 38 27" fill="none" stroke="#a51e4e" stroke-linecap="round" stroke-width="2.4" />
+      <path d="M39 13 C35 9 31 10 29 13" fill="none" stroke="#ffd0da" stroke-linecap="round" stroke-opacity=".82" stroke-width="2" />
+    </svg>
+  </template>
 
   <main class="container" id="birthdayPage" inert aria-hidden="true">
     <section class="card">
@@ -1211,6 +1378,28 @@
       });
     }
 
+    function buatHujanMawar() {
+      const roseShower = document.createElement("div");
+      roseShower.className = "rose-shower";
+      roseShower.setAttribute("aria-hidden", "true");
+      const roseCount = window.innerWidth <= 500 ? 30 : 42;
+
+      for (let i = 0; i < roseCount; i++) {
+        const rose = document.createElement("span");
+        rose.className = "shower-rose";
+        rose.append(document.getElementById("roseTemplate").content.cloneNode(true));
+        rose.style.setProperty("--rose-size", `${48 + Math.random() * 34}px`);
+        rose.style.setProperty("--rose-x", `${(Math.random() - 0.5) * (window.innerWidth + 150)}px`);
+        rose.style.setProperty("--rose-y", `${(Math.random() - 0.5) * (window.innerHeight + 150)}px`);
+        rose.style.setProperty("--rose-rotation", `${Math.random() * 90 - 45}deg`);
+        rose.style.setProperty("--rose-delay", `${Math.random() * 0.24}s`);
+        roseShower.appendChild(rose);
+      }
+
+      document.body.appendChild(roseShower);
+      window.setTimeout(() => roseShower.remove(), 2600);
+    }
+
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const video = entry.target;
@@ -1235,6 +1424,10 @@
       introScreen.classList.add("opening");
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reducedMotion) {
+        buatHujanMawar();
+      }
+
       window.setTimeout(() => {
         document.body.classList.add("page-open");
         birthdayPage.inert = false;
@@ -1246,7 +1439,7 @@
 
         window.setTimeout(() => {
           introScreen.remove();
-        }, reducedMotion ? 0 : 850);
+        }, reducedMotion ? 0 : 1300);
       }, reducedMotion ? 0 : 850);
     });
 
