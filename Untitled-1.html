@@ -157,17 +157,35 @@
       inset: 0;
       overflow: hidden;
       pointer-events: none;
+      background:
+        radial-gradient(ellipse at center, rgba(255, 224, 236, 0.2), transparent 62%),
+        radial-gradient(ellipse at 50% 55%, rgba(166, 34, 79, 0.12), transparent 75%);
+      animation: rose-aura 2.5s ease-out both;
+    }
+
+    .rose-shower::before {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255, 247, 220, 0.95) 0 1px, transparent 2px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 1px, transparent 2px);
+      background-position: 0 0, 19px 27px;
+      background-size: 73px 83px, 109px 97px;
+      content: "";
+      opacity: 0;
+      animation: rose-sparkle 1.8s ease-out both;
     }
 
     .shower-rose {
       position: absolute;
+      z-index: 1;
       top: 50%;
       left: 50%;
       display: block;
       width: var(--rose-size);
       height: calc(var(--rose-size) * 1.16);
-      filter: drop-shadow(0 5px 9px rgba(111, 24, 59, 0.28));
-      animation: rose-burst 2.2s cubic-bezier(0.15, 0.65, 0.25, 1) var(--rose-delay) both;
+      filter: drop-shadow(0 8px 12px rgba(105, 20, 55, 0.3));
+      animation: rose-burst 2.5s cubic-bezier(0.16, 0.72, 0.22, 1) var(--rose-delay) both;
       will-change: transform, opacity;
     }
 
@@ -176,20 +194,62 @@
       width: 100%;
       height: 100%;
       overflow: visible;
+      filter: saturate(1.12) contrast(1.04);
+      animation: rose-sway 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes rose-aura {
+      0% {
+        opacity: 0;
+      }
+
+      18%,
+      66% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes rose-sparkle {
+      20%,
+      62% {
+        opacity: 0.72;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes rose-sway {
+      from {
+        transform: rotate(-5deg) scale(0.98);
+      }
+
+      to {
+        transform: rotate(5deg) scale(1.03);
+      }
     }
 
     @keyframes rose-burst {
       0% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.15) rotate(-30deg);
+        transform: translate(-50%, -50%) scale(0.12) rotate(-40deg);
       }
 
       14% {
         opacity: 1;
       }
 
-      72% {
+      68% {
         opacity: 1;
+        transform:
+          translate(calc(-50% + var(--rose-x)), calc(-50% + var(--rose-y)))
+          scale(1.12)
+          rotate(var(--rose-rotation));
       }
 
       100% {
