@@ -13,11 +13,13 @@
     }
 
     :root {
-      --pink: #f19ab5;
-      --light-pink: #ffe3ed;
-      --purple: #b5a0ee;
-      --cream: #fff8f5;
-      --text: #fff3f6;
+      --pink: #e94f89;
+      --light-pink: #fff0f6;
+      --purple: #d99bbf;
+      --cream: #fff9fc;
+      --text: #fff7fa;
+      --rose-gold: #f6cada;
+      --berry: #9f315f;
     }
 
     body {
@@ -27,10 +29,10 @@
       font-family: "Segoe UI", Georgia, serif;
       color: var(--text);
       background:
-        radial-gradient(ellipse at 12% 14%, rgba(255, 255, 255, 0.88), transparent 27%),
-        radial-gradient(ellipse at 88% 82%, rgba(216, 104, 153, 0.3), transparent 32%),
-        radial-gradient(ellipse at 54% 4%, rgba(255, 226, 232, 0.8), transparent 34%),
-        linear-gradient(145deg, #ffe8ef, #f6c2d4 48%, #fbdce7);
+        radial-gradient(ellipse at 12% 12%, rgba(255, 255, 255, 0.95), transparent 25%),
+        radial-gradient(ellipse at 88% 75%, rgba(223, 88, 145, 0.28), transparent 32%),
+        radial-gradient(ellipse at 53% 5%, rgba(255, 233, 241, 0.86), transparent 37%),
+        linear-gradient(145deg, #fff0f6, #f7c0d5 48%, #efabc7);
     }
 
     body:not(.page-open) {
@@ -42,12 +44,23 @@
       z-index: 0;
       inset: 0;
       background-image:
-        radial-gradient(rgba(255, 255, 255, 0.9) 1px, transparent 1.5px),
-        radial-gradient(rgba(203, 104, 147, 0.38) 1px, transparent 1.5px);
+        radial-gradient(rgba(255, 255, 255, 0.92) 1px, transparent 1.5px),
+        radial-gradient(rgba(178, 67, 119, 0.28) 1px, transparent 1.5px);
       background-position: 0 0, 16px 21px;
-      background-size: 62px 62px, 91px 91px;
+      background-size: 76px 76px, 112px 112px;
       content: "";
-      opacity: 0.38;
+      opacity: 0.32;
+      pointer-events: none;
+    }
+
+    body::after {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 0% 48%, rgba(255, 255, 255, 0.36), transparent 36%),
+        radial-gradient(ellipse at 100% 25%, rgba(213, 83, 139, 0.18), transparent 34%);
+      content: "";
       pointer-events: none;
     }
 
@@ -60,9 +73,9 @@
       overflow: hidden;
       padding: 24px;
       background:
-        radial-gradient(ellipse at 50% 43%, rgba(255, 222, 233, 0.78), transparent 42%),
-        radial-gradient(ellipse at 16% 18%, rgba(255, 245, 239, 0.64), transparent 34%),
-        linear-gradient(150deg, #efabc3, #d878a0 54%, #ba668f);
+        radial-gradient(ellipse at 50% 43%, rgba(255, 225, 237, 0.76), transparent 42%),
+        radial-gradient(ellipse at 16% 18%, rgba(255, 246, 249, 0.58), transparent 34%),
+        linear-gradient(150deg, #e980a8, #c64e82 54%, #9f315f);
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
 
@@ -71,7 +84,7 @@
       position: absolute;
       width: 260px;
       height: 260px;
-      border: 1px solid rgba(255, 255, 255, 0.42);
+      border: 1px solid rgba(255, 232, 241, 0.45);
       border-radius: 50%;
       content: "";
       animation: orbit 18s linear infinite;
@@ -115,10 +128,13 @@
       width: 220px;
       height: 146px;
       margin: 0 auto 32px;
-      border: 1px solid rgba(255, 224, 231, 0.55);
+      border: 1px solid rgba(255, 237, 244, 0.72);
       border-radius: 10px;
-      background: linear-gradient(145deg, #f5abc0, #cf769b);
-      box-shadow: 0 22px 65px rgba(132, 55, 91, 0.24), 0 0 38px rgba(240, 154, 190, 0.3);
+      background: linear-gradient(145deg, #f5b5cb, #cb5d8a);
+      box-shadow:
+        0 22px 65px rgba(92, 22, 53, 0.3),
+        0 0 38px rgba(255, 214, 229, 0.35),
+        inset 0 1px rgba(255, 255, 255, 0.45);
       animation: amplop-melayang 3s ease-in-out infinite;
       perspective: 700px;
     }
@@ -139,16 +155,110 @@
         transform 1s cubic-bezier(0.18, 0.8, 0.25, 1) 0.12s;
     }
 
-    .rose-bouquet svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-      overflow: visible;
+    .bouquet-rose {
+      position: absolute;
+      bottom: 0;
+      width: 54px;
+      height: 142px;
+      transform-origin: 50% 100%;
     }
 
-    .rose-flower {
-      transform-box: fill-box;
-      transform-origin: center;
+    .bouquet-rose.rose-first {
+      left: 11px;
+      --bouquet-tilt: -15deg;
+      transform: rotate(var(--bouquet-tilt));
+    }
+
+    .bouquet-rose.rose-second {
+      left: 58px;
+      bottom: 11px;
+      z-index: 1;
+      --bouquet-tilt: 0deg;
+    }
+
+    .bouquet-rose.rose-third {
+      right: 8px;
+      --bouquet-tilt: 15deg;
+      transform: rotate(var(--bouquet-tilt));
+    }
+
+    .rose-head {
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      width: 52px;
+      aspect-ratio: 1;
+      border: 1px solid rgba(255, 222, 235, 0.72);
+      border-radius: 48% 52% 46% 54%;
+      background:
+        radial-gradient(ellipse at 50% 55%, #81163e 0 7%, transparent 8%),
+        radial-gradient(ellipse at 43% 42%, #ffb1c3 0 15%, transparent 17%),
+        radial-gradient(ellipse at 64% 49%, #ed6e91 0 21%, transparent 23%),
+        radial-gradient(ellipse at 34% 59%, #d94370 0 25%, transparent 27%),
+        radial-gradient(ellipse at 52% 30%, #f98ba8 0 29%, transparent 31%),
+        radial-gradient(circle at 42% 38%, #f78aa5, #c62d61 68%, #82163e 100%);
+      box-shadow:
+        inset 2px 3px 5px rgba(255, 240, 245, 0.42),
+        inset -4px -5px 8px rgba(100, 13, 45, 0.3),
+        0 5px 13px rgba(116, 22, 58, 0.28);
+      transform: translateX(-50%);
+    }
+
+    .rose-head::before {
+      position: absolute;
+      top: 8%;
+      left: 17%;
+      width: 25%;
+      height: 14%;
+      border-radius: 50%;
+      background: rgba(255, 244, 247, 0.78);
+      content: "";
+      filter: blur(2px);
+      transform: rotate(-35deg);
+    }
+
+    .rose-stem {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 70%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #326647, #80b978 48%, #356b4b);
+      box-shadow: 1px 1px 3px rgba(30, 73, 48, 0.24);
+      transform: translateX(-50%);
+    }
+
+    .rose-leaf {
+      position: absolute;
+      z-index: 1;
+      bottom: 24%;
+      width: 23px;
+      height: 12px;
+      border: 1px solid rgba(235, 255, 230, 0.4);
+      background: linear-gradient(145deg, #9bd18e, #39764e 78%);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.35);
+    }
+
+    .rose-leaf-left {
+      left: 5px;
+      border-radius: 100% 0 100% 0;
+      transform: rotate(12deg);
+    }
+
+    .rose-leaf-right {
+      right: 5px;
+      bottom: 38%;
+      border-radius: 0 100% 0 100%;
+      transform: rotate(-12deg);
+    }
+
+    .css-rose {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      filter: saturate(1.12) contrast(1.04);
+      animation: rose-sway 1.2s ease-in-out infinite alternate;
     }
 
     .rose-shower {
@@ -189,13 +299,33 @@
       will-change: transform, opacity;
     }
 
-    .shower-rose svg {
+    .shower-rose .css-rose {
       display: block;
       width: 100%;
       height: 100%;
-      overflow: visible;
       filter: saturate(1.12) contrast(1.04);
       animation: rose-sway 1.2s ease-in-out infinite alternate;
+    }
+
+    .shower-rose .rose-head {
+      width: 78%;
+    }
+
+    .shower-rose .rose-stem {
+      height: 45%;
+    }
+
+    .shower-rose .rose-leaf {
+      width: 34%;
+      height: 15%;
+    }
+
+    .shower-rose .rose-leaf-left {
+      left: 10%;
+    }
+
+    .shower-rose .rose-leaf-right {
+      right: 10%;
     }
 
     @keyframes rose-aura {
@@ -324,23 +454,26 @@
 
     .intro-copy {
       margin-bottom: 22px;
-      color: #fff4f7;
+      color: #fff7fa;
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.45rem;
+      text-shadow: 0 2px 14px rgba(96, 21, 51, 0.18);
     }
 
     .intro-copy strong {
-      color: #ffc0d2;
+      color: #ffe2ec;
       font-weight: 600;
     }
 
     .intro-button {
       padding: 13px 25px;
-      border: 1px solid rgba(255, 225, 235, 0.65);
+      border: 1px solid rgba(255, 239, 246, 0.72);
       border-radius: 999px;
       color: white;
-      background: linear-gradient(120deg, #df719d, #c45f91);
-      box-shadow: 0 10px 30px rgba(132, 55, 91, 0.24);
+      background: linear-gradient(120deg, #ef82a8, #bd3f75);
+      box-shadow:
+        0 10px 30px rgba(92, 21, 52, 0.28),
+        inset 0 1px rgba(255, 255, 255, 0.42);
       font-size: 0.98rem;
       font-weight: 700;
       cursor: pointer;
@@ -349,7 +482,7 @@
 
     .intro-button:hover {
       transform: translateY(-3px);
-      box-shadow: 0 14px 32px rgba(132, 55, 91, 0.3), 0 0 20px rgba(240, 154, 190, 0.3);
+      box-shadow: 0 14px 32px rgba(92, 21, 52, 0.34), 0 0 24px rgba(255, 213, 230, 0.38);
     }
 
     .intro-button:focus-visible {
@@ -366,27 +499,27 @@
       transform: translate(-50%, -54px) scale(1);
     }
 
-    .intro-screen.opening .rose-flower {
+    .intro-screen.opening .bouquet-rose {
       animation: rose-bloom 0.7s cubic-bezier(0.18, 0.8, 0.25, 1) both;
     }
 
-    .intro-screen.opening .rose-second {
+    .intro-screen.opening .bouquet-rose.rose-second {
       animation-delay: 0.12s;
     }
 
-    .intro-screen.opening .rose-third {
+    .intro-screen.opening .bouquet-rose.rose-third {
       animation-delay: 0.24s;
     }
 
     @keyframes rose-bloom {
       from {
         opacity: 0;
-        transform: scale(0.25) rotate(-18deg);
+        transform: translateY(12px) rotate(var(--bouquet-tilt)) scale(0.25);
       }
 
       to {
         opacity: 1;
-        transform: scale(1) rotate(0);
+        transform: translateY(0) rotate(var(--bouquet-tilt)) scale(1);
       }
     }
 
@@ -471,23 +604,24 @@
     .card {
       position: relative;
       padding: 54px 40px 44px;
-      border: 1px solid rgba(255, 246, 250, 0.72);
+      border: 1px solid rgba(255, 241, 247, 0.8);
       border-radius: 30px;
       background:
-        radial-gradient(ellipse at 50% 0, rgba(255, 234, 242, 0.34), transparent 54%),
-        linear-gradient(145deg, #df91b0, #cf789f 52%, #bf6c96);
+        radial-gradient(ellipse at 50% 0, rgba(255, 239, 246, 0.32), transparent 54%),
+        linear-gradient(145deg, #d96f9a, #bf4f7e 52%, #a53f70);
       box-shadow:
-        0 34px 90px rgba(147, 62, 104, 0.24),
-        0 0 0 6px rgba(255, 255, 255, 0.24),
-        0 0 55px rgba(222, 119, 164, 0.25);
-      backdrop-filter: blur(16px);
+        0 34px 90px rgba(119, 33, 73, 0.28),
+        0 0 0 6px rgba(255, 245, 249, 0.34),
+        0 0 55px rgba(222, 105, 157, 0.32),
+        inset 0 1px rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(18px);
       animation: muncul 1s cubic-bezier(0.2, 0.75, 0.25, 1) both;
     }
 
     .card::before {
       position: absolute;
       inset: 12px;
-      border: 1px solid rgba(255, 244, 248, 0.42);
+      border: 1px solid rgba(255, 236, 244, 0.48);
       border-radius: 22px;
       content: "";
       pointer-events: none;
@@ -499,8 +633,8 @@
       top: 4px;
       left: 50%;
       padding: 0 12px;
-      color: #f1a8c3;
-      background: #d68ba9;
+      color: #fff0f5;
+      background: #c85e89;
       content: "✧";
       font-size: 0.9rem;
       transform: translateX(-50%);
@@ -574,10 +708,12 @@
       display: inline-block;
       margin-bottom: 22px;
       padding: 9px 19px;
-      border: 1px solid rgba(227, 168, 193, 0.56);
+      border: 1px solid rgba(255, 231, 240, 0.65);
       border-radius: 999px;
-      color: #ffd0df;
-      background: rgba(255, 231, 240, 0.18);
+      color: #fff0f5;
+      background: linear-gradient(135deg, rgba(255, 235, 243, 0.24), rgba(255, 220, 235, 0.12));
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.24), 0 8px 24px rgba(112, 29, 65, 0.12);
+      backdrop-filter: blur(10px);
       font-family: "Segoe UI", sans-serif;
       font-size: 0.76rem;
       font-weight: 800;
@@ -593,18 +729,19 @@
 
     h1 {
       margin-bottom: 12px;
-      color: #ffe8ef;
+      color: #fff3f7;
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(2.25rem, 8vw, 4.4rem);
       font-weight: 500;
       letter-spacing: -1.5px;
       line-height: 1.08;
-      text-shadow: 0 4px 28px rgba(242, 158, 192, 0.2);
+      text-shadow: 0 3px 0 rgba(131, 35, 74, 0.14), 0 8px 30px rgba(82, 19, 47, 0.24);
     }
 
     h2 {
       margin-bottom: 25px;
-      color: #fff0f6;
+      color: #ffe8f0;
+      text-shadow: 0 2px 14px rgba(91, 23, 52, 0.16);
       font-size: clamp(1.08rem, 4vw, 1.45rem);
       font-weight: 500;
     }
@@ -663,8 +800,11 @@
       padding: 10px 10px 14px;
       border: 1px solid rgba(255, 234, 242, 0.58);
       border-radius: 18px;
-      background: linear-gradient(145deg, #fff8fb, #f1e5f4);
-      box-shadow: 0 18px 46px rgba(5, 4, 17, 0.32), 0 0 32px rgba(237, 158, 196, 0.18);
+      background: linear-gradient(145deg, #fffafd, #f9e7ef 58%, #f1d4e1);
+      box-shadow:
+        0 18px 46px rgba(96, 30, 61, 0.22),
+        0 0 32px rgba(255, 213, 229, 0.3),
+        inset 0 1px rgba(255, 255, 255, 0.9);
     }
 
     .photo-slide {
@@ -700,7 +840,7 @@
 
     .photo-caption {
       margin-top: 14px;
-      color: #77566f;
+      color: #70435d;
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.1rem;
       font-style: italic;
@@ -759,8 +899,11 @@
       padding: 9px;
       border: 1px solid rgba(255, 234, 242, 0.5);
       border-radius: 20px;
-      background: linear-gradient(145deg, #fff4f8, #f2d3e1);
-      box-shadow: 0 18px 46px rgba(132, 55, 91, 0.2), 0 0 32px rgba(237, 158, 196, 0.22);
+      background: linear-gradient(145deg, #fff9fc, #f8e1eb 58%, #edc4d6);
+      box-shadow:
+        0 18px 46px rgba(112, 35, 70, 0.2),
+        0 0 32px rgba(255, 208, 226, 0.26),
+        inset 0 1px rgba(255, 255, 255, 0.84);
     }
 
     .video-frame video {
@@ -968,11 +1111,14 @@
       margin: 8px 5px;
       padding: 13px 22px;
       border: 0;
-      border: 1px solid rgba(255, 231, 241, 0.42);
+      border: 1px solid rgba(255, 238, 245, 0.62);
       border-radius: 999px;
       color: white;
-      background: linear-gradient(115deg, #df719d, #c85f91 58%, #e28cad);
-      box-shadow: 0 9px 22px rgba(132, 55, 91, 0.22), inset 0 1px rgba(255, 255, 255, 0.24);
+      background: linear-gradient(115deg, #ed83a8, #ca4f82 58%, #e477a0);
+      box-shadow:
+        0 9px 22px rgba(111, 31, 67, 0.24),
+        inset 0 1px rgba(255, 255, 255, 0.38),
+        inset 0 -2px rgba(119, 26, 64, 0.1);
       cursor: pointer;
       font-size: 1rem;
       font-weight: 700;
@@ -981,7 +1127,7 @@
 
     button:hover {
       transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 13px 27px rgba(132, 55, 91, 0.3), 0 0 20px rgba(216, 111, 145, 0.3);
+      box-shadow: 0 13px 27px rgba(111, 31, 67, 0.3), 0 0 24px rgba(255, 205, 225, 0.46);
     }
 
     button:focus-visible {
@@ -1201,51 +1347,9 @@
         <div class="envelope-flap"></div>
         <div class="envelope-seal">♡</div>
         <div class="rose-bouquet">
-          <svg viewBox="0 0 180 170" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="rosePetals" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#ffb1c7" />
-                <stop offset="0.55" stop-color="#e34d79" />
-                <stop offset="1" stop-color="#9f214e" />
-              </linearGradient>
-              <linearGradient id="roseLeaf" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#8ac98c" />
-                <stop offset="1" stop-color="#34744e" />
-              </linearGradient>
-            </defs>
-            <g fill="none" stroke="#477d52" stroke-linecap="round" stroke-width="3.5">
-              <path d="M88 158 C83 120 58 91 48 57" />
-              <path d="M90 158 C94 111 91 69 91 38" />
-              <path d="M92 158 C105 118 127 90 134 60" />
-            </g>
-            <g fill="url(#roseLeaf)" stroke="#fff0f3" stroke-opacity=".5" stroke-width="1">
-              <path d="M73 130 C48 126 40 111 43 100 C61 101 74 111 78 125Z" />
-              <path d="M101 126 C119 107 135 109 143 116 C132 131 117 137 103 133Z" />
-              <path d="M81 105 C61 94 59 79 65 70 C80 78 87 91 85 103Z" />
-              <path d="M99 94 C114 75 130 76 137 83 C127 98 113 104 100 101Z" />
-            </g>
-            <g class="rose-flower rose-first">
-              <circle cx="48" cy="49" r="21" fill="url(#rosePetals)" />
-              <ellipse cx="39" cy="48" rx="9" ry="14" fill="#f47798" transform="rotate(-38 39 48)" />
-              <ellipse cx="54" cy="43" rx="9" ry="14" fill="#f889a6" transform="rotate(35 54 43)" />
-              <ellipse cx="49" cy="55" rx="10" ry="13" fill="#c93665" transform="rotate(8 49 55)" />
-              <path d="M43 51 C39 43 49 37 56 44 C62 51 53 61 45 56 C41 53 44 47 49 47 C53 47 55 51 52 54" fill="none" stroke="#8d2145" stroke-linecap="round" stroke-width="3" />
-            </g>
-            <g class="rose-flower rose-second">
-              <circle cx="91" cy="31" r="23" fill="url(#rosePetals)" />
-              <ellipse cx="80" cy="29" rx="10" ry="15" fill="#f47798" transform="rotate(-38 80 29)" />
-              <ellipse cx="97" cy="25" rx="10" ry="15" fill="#f889a6" transform="rotate(35 97 25)" />
-              <ellipse cx="92" cy="38" rx="11" ry="14" fill="#c93665" transform="rotate(8 92 38)" />
-              <path d="M85 33 C81 24 92 18 100 26 C107 34 96 45 87 39 C83 36 86 29 92 29 C96 29 98 33 94 37" fill="none" stroke="#8d2145" stroke-linecap="round" stroke-width="3" />
-            </g>
-            <g class="rose-flower rose-third">
-              <circle cx="135" cy="51" r="21" fill="url(#rosePetals)" />
-              <ellipse cx="126" cy="49" rx="9" ry="14" fill="#f47798" transform="rotate(-38 126 49)" />
-              <ellipse cx="141" cy="45" rx="9" ry="14" fill="#f889a6" transform="rotate(35 141 45)" />
-              <ellipse cx="136" cy="57" rx="10" ry="13" fill="#c93665" transform="rotate(8 136 57)" />
-              <path d="M130 52 C126 44 136 38 143 45 C150 52 141 63 132 57 C128 54 131 48 136 48 C140 48 142 52 139 55" fill="none" stroke="#8d2145" stroke-linecap="round" stroke-width="3" />
-            </g>
-          </svg>
+          <div class="bouquet-rose rose-first"><span class="rose-head"></span><span class="rose-stem"></span><span class="rose-leaf rose-leaf-left"></span><span class="rose-leaf rose-leaf-right"></span></div>
+          <div class="bouquet-rose rose-second"><span class="rose-head"></span><span class="rose-stem"></span><span class="rose-leaf rose-leaf-left"></span><span class="rose-leaf rose-leaf-right"></span></div>
+          <div class="bouquet-rose rose-third"><span class="rose-head"></span><span class="rose-stem"></span><span class="rose-leaf rose-leaf-left"></span><span class="rose-leaf rose-leaf-right"></span></div>
         </div>
       </div>
       <p class="intro-copy" id="introCopy"><strong>Untuk cantiku</strong></p>
@@ -1256,17 +1360,12 @@
   <div class="hearts" id="hearts"></div>
   <div id="confetti"></div>
   <template id="roseTemplate">
-    <svg viewBox="0 0 80 94" aria-hidden="true" focusable="false">
-      <path d="M40 48 C39 63 39 77 40 90" fill="none" stroke="#39774f" stroke-linecap="round" stroke-width="4" />
-      <path d="M39 68 C27 56 17 59 15 64 C21 75 31 77 40 73Z" fill="#5a9c63" />
-      <path d="M41 78 C52 65 62 67 65 72 C59 83 50 86 40 83Z" fill="#76b875" />
-      <path d="M40 7 C33 0 21 3 19 12 C8 9 1 18 6 28 C0 36 7 47 17 47 C22 57 35 57 40 50 C48 58 61 55 64 45 C75 45 81 34 74 26 C78 16 69 7 59 10 C54 1 43 0 40 7Z" fill="#aa2452" />
-      <path d="M40 11 C33 5 24 9 24 17 C15 14 8 21 13 29 C6 36 13 44 21 42 C24 52 35 51 40 44 C47 52 57 48 58 40 C68 42 73 33 66 27 C71 18 62 12 55 16 C52 7 44 6 40 11Z" fill="#dc3d6a" />
-      <path d="M40 16 C34 11 28 15 29 22 C22 19 17 25 21 31 C16 36 21 42 28 39 C31 47 37 46 40 40 C45 47 52 43 51 37 C59 38 62 31 56 27 C60 21 54 16 49 20 C47 13 42 12 40 16Z" fill="#f26787" />
-      <path d="M40 21 C35 18 32 22 34 27 C29 24 25 29 29 33 C26 37 31 41 35 37 C37 43 42 42 43 37 C48 41 52 37 49 33 C54 30 51 25 47 27 C47 21 43 19 40 21Z" fill="#ff9bad" />
-      <path d="M39 25 C35 26 36 32 41 32 C45 32 45 27 42 26 C41 24 39 24 38 27" fill="none" stroke="#a51e4e" stroke-linecap="round" stroke-width="2.4" />
-      <path d="M39 13 C35 9 31 10 29 13" fill="none" stroke="#ffd0da" stroke-linecap="round" stroke-opacity=".82" stroke-width="2" />
-    </svg>
+    <div class="css-rose" aria-hidden="true">
+      <span class="rose-head"></span>
+      <span class="rose-stem"></span>
+      <span class="rose-leaf rose-leaf-left"></span>
+      <span class="rose-leaf rose-leaf-right"></span>
+    </div>
   </template>
 
   <main class="container" id="birthdayPage" inert aria-hidden="true">
